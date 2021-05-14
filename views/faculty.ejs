@@ -1,0 +1,41 @@
+<%- include ("includes/header") %>
+
+<div class="container-fluid upload-details">
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="main-title">
+            <h6>Phòng/Khoa</h6>
+         </div>
+      </div>
+   </div>
+
+   <div class="container">
+      <div class="row">
+         
+         
+         <% users.forEach(function (user) { %>
+            <% if (user.username && (user.username != "admin")) { %>
+            <div class="form-group col-md-3">
+               <a href="/my_channel">
+                  <div class="card text-center">
+                     <h6 class="card-header"><%= user.name %>  </h6> 
+                     <div class="card-body">
+                        <img class="avatar-faculty" src="<%= user.avatar %>">
+                        <p class="card-text">Số thông báo:</p> 
+                        <h6><i class="fas fa-check-circle text-success"></i>   Role:  </h6> 
+
+                           
+
+                           
+                   
+                     </div>
+                  </div>
+               </a>
+            </div>
+            <% } %>
+         <% }) %>
+      </div>
+   </div>
+
+
+</div>

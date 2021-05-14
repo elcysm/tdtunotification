@@ -1,0 +1,147 @@
+<%- include ("includes/header") %>
+
+
+      <div class="container-fluid pb-0">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="main-title">
+                  <h6>Timeline</h6>
+               </div>
+            </div>
+               
+               
+ 
+
+         </div>
+         <div class="video-block section-padding">
+            <div class="row">
+               <div class="col-sm-9">
+                  <div class="video-card">
+                     
+                     <div class="">
+                        <input readonly class="form-control text-center"value="Bấm vào đây để đăng thông báo..."  data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                     </div>
+                     
+                     <div class="text-center">
+                        <i class="fas fa-chevron-down"></i>
+                     </div>
+                  
+                     <div class="collapse" id="collapseExample">
+                        <div class="col-md-12">
+                           <form method="POST" action="/upload-video" enctype="multipart/form-data">
+                              <br>
+                              <div class="form-group">
+                                 <label>Tiêu đề</label>
+                                 <input type="text" name="title" class="form-control" placeholder= "Nhập tiêu đề..." required>
+                              </div>
+                              
+                              <div class="form-group">
+                                 <label>Nội dung</label>
+                                 <textarea type="text" name="description" rows="10"   placeholder= "Nhập nội dung..." class="form-control"></textarea>
+                              </div>
+                  
+                  
+                              <div class="row">
+                                 <div class="form-group col-sm-12">
+                                 <label>Điền link Youtube</label>
+                                 <input class="form-control" placeholder= "Nhúng link Youtube..." type="text" name="video" required>
+                                 </div>
+                              </div>
+                  
+                              <div class="row">
+                                 <div class="form-group col-sm-9 ">
+                                    <label>Chọn hình ảnh</label>
+                                    <input class="btn btn-block btn-lg text-center" type="file" name="thumbnail" accept="image/*" required></input>
+                                 </div>
+                                 <div class="form-group col-sm-3 ">
+                                    <label></label>
+                                    <button type="submit" class="btn btn-outline-primary btn-block btn-lg">Xác nhận</button>
+                                 </div>
+                              </div>
+                              
+                              <br>
+                  
+
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+
+                  <br>
+
+                  <% posts.forEach(function (video) { %>
+                     <div class="col-sm-12">
+                        <div class="video-card">
+                           <div class="video-card-body">
+                              <div class="row card-header">
+
+                                 <div class="col-sm-1">
+                                 <img class="avatar-profile" width="50px"  height="50px"src="<%= video.user.avatar %>">  
+                                 </div>
+
+                                 <div class="row col-sm-11">
+                                    <div class="col-sm-11 text-white">
+                                       <h6 class="text-white"><%= video.user.name %> <i class="fas fa-check-circle text-white"></i></h6> 
+                                       <i class="fas fa-clock"></i> <%
+                                       var createdAt = new Date(video.createdAt);
+                                       var date = createdAt.getDate() + ""; %>
+                                       <%= createdAt.getHours() + ":" + createdAt.getMinutes()  + " " + date.padStart(2, "0") + " " + months[createdAt.getMonth()] + ", " + createdAt.getFullYear() %>
+                                    </div>
+
+                                    <div class="col-sm-1 text-white text-right">
+                                       <i class="fas fa-ellipsis-v"></i>
+                                    </div>
+
+                                 </div>
+
+                              </div>
+                               <Br>
+                              <div class="col-sm-12">
+                                 <h5>Tiêu đề: <%= video.title %></h5>
+                                 <a href="watch?v=<%= video.watch %>"></a>
+                              </div>
+                           </div>
+                              <div class="video-card-image">
+                                    <iframe width="900px" height="400px" src="<%= video.video_link %>"> </iframe> 
+                              </div>
+                        </div>
+                     </div>  
+                     
+                  <% }) %>
+
+
+
+
+               </div>
+               
+
+               
+               <div class="col-sm-3">
+                  <div class="header-news text-center text-white align-center">
+                     <label style="margin-top:10px"> Thông báo mới</label>
+                  </div>
+                  <div class="video-card" >
+                     <% posts.forEach(function (post) { %>
+                        <% if ((post.user.name != "admin") && (post.user.role)) { %>
+                        <div class="video-card-body">
+                           <div class="text-primary">
+                              <a href="" class="font-weight-bold"><i class="fas fa-caret-right"></i> <%= post.title %> </a>
+                           </div>
+                           <div class="">
+                              <a href="" class="font-italic"> <%= post.user.name %> </a> 
+                           </div>
+                        </div>
+                        <% } %>
+                     <% }) %>
+                     
+                   </div>
+               </div>
+               
+
+            </div>
+            
+         </div>
+      </div>
+      <!-- /.container-fluid -->
+
+
