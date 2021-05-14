@@ -1,0 +1,15 @@
+---
+application:
+  name: "tdtunotification"
+  project: "TDTU NOTIFICATION"
+  organization: "QoveryCommunity"
+databases:
+- type: "MONGODB"
+  name: "notification"
+  version: "4.4"
+routers:
+- name: "main-tdtunotification"
+  routes:
+  - application_name: "tdtunotification"
+    paths:
+    - "/*"
